@@ -1,0 +1,15 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+        
+    <form action="{% url 'TipoVehiculoCrear' %}" method="POST">{% csrf_token %}
+
+        {{miFormulario.as_p}}
+
+        <input type="submit" value="Enviar"/>
+
+    </form>
+
+{% endblock contenidoQueCambia %}

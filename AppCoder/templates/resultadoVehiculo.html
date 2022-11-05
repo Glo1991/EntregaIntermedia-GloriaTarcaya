@@ -1,0 +1,30 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+
+    <p>Resultado de Busqueda: {{marca}}</p>
+
+    {% if vehiculo %}
+
+        <ul>
+
+            {% for vehiculos in vehiculo %}
+                <li>
+                    
+                    {{vehiculos.marca}} -   {{vehiculos.modelo}} -   {{vehiculos.version}}
+                </li>
+            {% endfor %}
+                
+        </ul>
+
+    {% else %}
+
+        <p>No hubo coincidencias!</p>
+        
+    {% endif %}
+        
+
+{% endblock contenidoQueCambia %}

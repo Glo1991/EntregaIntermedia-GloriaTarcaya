@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+
+    <h1>Lista de Segmentos</h1>
+
+
+    <ul>
+        
+        {% for segmento in segmentos %}
+            <li>
+                {{segmento}}
+            </li>
+            
+        {% endfor %}
+    <div>
+        <button>
+             <a href="{% url 'SegmentoCrear' %}">Crear Segmento</a>
+        </button>
+        <button>
+            <a href="{% url 'BuscarSegmento' %}">Buscar Segmento</a>
+       </button>
+    </div> 
+    </ul>
+
+{% endblock contenidoQueCambia %}

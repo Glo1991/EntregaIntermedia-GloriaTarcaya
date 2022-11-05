@@ -1,0 +1,30 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+
+    <p>Resultado de Busqueda: {{tipoVehiculo}}</p>
+
+    {% if tipoVe %}
+
+        <ul>
+
+            {% for tipovehiculo in tipoVe %}
+                <li>
+                    
+                    {{tipovehiculo.name}}
+                </li>
+            {% endfor %}
+                
+        </ul>
+
+    {% else %}
+
+        <p>No hubo coincidencias!</p>
+        
+    {% endif %}
+        
+
+{% endblock contenidoQueCambia %}

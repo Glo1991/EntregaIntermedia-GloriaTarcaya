@@ -1,0 +1,30 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+
+    <p>Resultado de Busqueda: {{segmento}}</p>
+
+    {% if segmentoname %}
+
+        <ul>
+
+            {% for seg in segmentoname %}
+                <li>
+                    
+                    {{seg.name}} 
+                </li>
+            {% endfor %}
+                
+        </ul>
+
+    {% else %}
+
+        <p>No hubo coincidencias!</p>
+        
+    {% endif %}
+        
+
+{% endblock contenidoQueCambia %}

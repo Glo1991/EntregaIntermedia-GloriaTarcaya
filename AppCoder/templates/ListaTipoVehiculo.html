@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+
+    <h1>Lista de Tipo de Vehiculos</h1>
+
+
+    <ul>
+        
+        {% for tipov in tipoVehiculos %}
+            <li>
+                {{tipov}}
+            </li>
+            
+        {% endfor %}
+    <div>
+        <button>
+             <a href="{% url 'TipoVehiculoCrear' %}">Crear Tipo de Vehículo</a>
+        </button>
+        <button>
+            <a href="{% url 'BuscarTipoVehiculo' %}">Buscar Tipo de Vehículo</a>
+       </button>
+    </div> 
+    </ul>
+
+{% endblock contenidoQueCambia %}
