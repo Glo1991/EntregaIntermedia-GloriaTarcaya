@@ -1,11 +1,18 @@
 from django.shortcuts import render
 from .models import TipoVehiculo, Vehiculo, Segmento
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario
+from .forms import TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 def inicio(request):
     
     return render(request, "inicio.html")
 
+#@staff_member_required(login_url="/app-coder/login")
 def crea_TipoVehiculo(request):
 
     print('method:', request.method)
@@ -167,3 +174,66 @@ def resultadoSegmento(request):
         respuesta = "No ingresaste datos"
 
     return HttpResponse(respuesta)
+
+def login_request (request):
+    print('method:', request.method)
+    print('post: ', request.POST)
+    if request.method=="POST":
+        miFormulario=AuthenticationForm(request, data=request.POST)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+
+            usuario = data["username"]
+            psw = data["password"]
+
+            user = authenticate(username=usuario, password=psw)
+            if user:
+
+                login(request, user)
+
+                return render(request, "inicio.html", {"mensaje": f'Bienvenido {usuario}'})
+            
+            else:
+
+                return render(request, "inicio.html", {"mensaje": f'Error, datos incorrectos'})
+
+        return render(request, "inicio.html", {"mensaje": f'Error, formulario invalido'})
+
+    else:
+
+        miFormulario = AuthenticationForm()
+
+        return render(request, "login.html", {"miFormulario": miFormulario})
+
+def register(request):
+
+    print('method:', request.method)
+    print('post: ', request.POST)
+
+    if request.method == 'POST':
+
+        miFormulario = UserRegisterForm(request.POST)
+        
+        if miFormulario.is_valid():
+
+            username = miFormulario.cleaned_data["username"]
+
+            miFormulario.save()
+            
+            miFormulariologin=AuthenticationForm(request, data=request.POST)
+            return render(request, "login.html", {"miFormulario": miFormulariologin})
+
+        else:
+           
+            return render(request, "inicio.html", {"mensaje": f'Error al crear el usuario'})
+
+    else:
+
+        miFormulario = UserRegisterForm()
+
+        return render(request, "registro.html", {"miFormulario": miFormulario})
+
+def about(request):
+
+    return render(request, "about.html")
