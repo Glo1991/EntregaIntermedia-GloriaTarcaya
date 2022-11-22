@@ -1,0 +1,18 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+
+<link href="{%static 'css/styles.css' %}" rel="stylesheet" />
+<h1>Perfil de Usuario: {{user.username}}</h1>
+<form action="{% url 'EditarPerfil' %}" method="GET" >{% csrf_token %} 
+    <fieldset disabled="disabled">
+    {{miFormulario.as_p}}
+    </fieldset>
+    <input type="submit" value="Editar"/>
+</form>
+
+
+{% endblock contenidoQueCambia %}

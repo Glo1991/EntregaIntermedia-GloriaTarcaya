@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from .models import TipoVehiculo, Vehiculo, Segmento
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm
+from .forms import TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm, UserEditForm, UserViewForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import update_session_auth_hash
 
 def inicio(request):
     
@@ -38,7 +39,7 @@ def crea_TipoVehiculo(request):
 
         return render(request, "TipoVehiculoCreate.html", {"miFormulario": miFormulario})
 
-
+@staff_member_required(login_url="/app-coder/listaVehiculo")
 def crea_Vehiculo(request):
 
     print('method:', request.method)
@@ -237,3 +238,43 @@ def register(request):
 def about(request):
 
     return render(request, "about.html")
+
+
+
+def editar_perfil(request):
+    
+    print('method:', request.method)
+    print('post: ', request.POST)
+
+    usuario = request.user
+
+    if request.method == 'POST':
+
+        miFormulario = UserEditForm(request.POST)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+            usuario.set_password(data["password1"])
+
+            usuario.save()
+            update_session_auth_hash(request, usuario)
+            miFormularioVerPErfil = UserViewForm(instance=request.user)
+            return render(request, "perfil.html", {"miFormulario": miFormularioVerPErfil})
+        
+        return render(request, "perfil.html", {"mensaje": 'Contraseñas no coinciden'} )
+    
+    else:
+
+        miFormulario = UserEditForm(instance=request.user)
+
+        return render(request, "editarPerfil.html", {"miFormulario": miFormulario})
+
+def ver_perfil(request):
+
+        miFormulario = UserViewForm(instance=request.user)
+
+        return render(request, "perfil.html", {"miFormulario": miFormulario})

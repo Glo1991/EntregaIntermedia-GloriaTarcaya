@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>One Page Wonder - Start Bootstrap Template</title>
+        <title>INFOCAR</title>
         <link rel="icon" type="image/x-icon" href="{%static 'assets/favicon.ico' %}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -35,11 +35,18 @@
                     <ul class="navbar-nav ms-auto">
                        
                         {% if user.is_authenticated %}
+                
                         <li class="nav-link">BIENVENID@ {{user.username}}</li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Log Out</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Perfil' %}">Ver Perfil</a></li>
+                    <!-- <div class='dropdown-header'>
+		                <div class='btn-group-vertical'>OPCION </div>		        
+			            <div class='dropdown-menu' id='option1'>Opcion 1</div>
+                    </div> -->
+
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Log Out</a></li>
                         {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Log In</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'Registrar' %}">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Log In</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Registrar' %}">Sign Up</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -49,9 +56,10 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Querés reservar un vehiculo?</h1>
-                    <h2 class="masthead-subheading mb-0"></h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Ver Catálogo</a>
+                    <h1 class="masthead-heading mb-0">Querés reservar un vehiculo?</h1>       
+                    <a class="btn btn-primary btn-xl rounded-pill " href="#scroll">Ver Catálogo</a>
+                    <p><h2 class="masthead-subheading mb-0">También podes ver info de lo último en vehículos!</h2></p>
+                    <!-- <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Ver INFO</a> -->
                 </div>
             </div>
             <div class="bg-circle-1 bg-circle"></div>
