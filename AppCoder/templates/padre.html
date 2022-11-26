@@ -37,12 +37,12 @@
                         {% if user.is_authenticated %}
                 
                         <li class="nav-link">BIENVENID@ {{user.username}}</li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Perfil' %}">Ver Perfil</a></li>
-                    <!-- <div class='dropdown-header'>
-		                <div class='btn-group-vertical'>OPCION </div>		        
-			            <div class='dropdown-menu' id='option1'>Opcion 1</div>
-                    </div> -->
-
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Perfil' %}">Ver Perfil</a></li>      
+                            {% if request.user.avatar_set.first.imagen.url != None %}       
+                            <img height="40px" src="{{request.user.avatar_set.first.imagen.url}}" style=" border-radius: 40px; background-size: 100% auto;"/>
+                            {% else %}
+                            <img height="40px" src="{%static 'assets/img/perfilvacio.png' %}" style=" border-radius: 40px; background-size: 100% auto;"/>
+                            {% endif %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Log Out</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Log In</a></li>
@@ -116,7 +116,7 @@
             </div>
         </section> -->
         {% block contenidoQueCambia %}
-        
+
     
          {% endblock contenidoQueCambia %}
         <!-- Footer-->

@@ -1,16 +1,19 @@
 from django.shortcuts import render
-from .models import TipoVehiculo, Vehiculo, Segmento
+from .models import TipoVehiculo, Vehiculo, Segmento, Avatar
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm, UserEditForm, UserViewForm
+from .forms import TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm, UserEditForm, UserViewForm, AvatarFormulario
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import User
 
 def inicio(request):
-    
+    #print(Avatar.objects.filter(user=request.user.id)[0].imagen.url)
+    #avatares=Avatar.objects.filter(user=request.user.id)
+    #return render(request, "inicio.html", {"url": avatares[0].imagen.url})
     return render(request, "inicio.html")
 
 #@staff_member_required(login_url="/app-coder/login")
@@ -278,3 +281,29 @@ def ver_perfil(request):
         miFormulario = UserViewForm(instance=request.user)
 
         return render(request, "perfil.html", {"miFormulario": miFormulario})
+
+
+def agregar_avatar(request):
+
+    if request.method == 'POST':
+
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+            u = User.objects.get(username=request.user)
+            avatar = Avatar( user=u, imagen= miFormulario.cleaned_data['imagen'])
+            avatar.save()
+            miFormularioVerPErfil = UserViewForm(instance=request.user)
+            return render(request, "perfil.html", {"miFormulario": miFormularioVerPErfil})
+        
+        return render(request, "perfil.html", {"mensaje": 'Contraseñas no coinciden'} )
+    
+    else:
+
+        miFormulario = AvatarFormulario()
+
+        return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
+
+def mostrar_avatar(request):
+    avatares=Avatar.objects.filter(user=request.user.id)[0].imagen.url
+    return render(request, "", {"url": avatares[0].imagen.url})

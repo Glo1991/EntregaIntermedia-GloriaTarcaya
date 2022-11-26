@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, UsernameField
 from django.contrib.auth.models import User
 from django.db import models
+#from .models import Avatar
+from django.shortcuts import render
 
 class TipoVehiculoFormulario(forms.Form):
 
@@ -68,3 +70,6 @@ class UserEditForm(UserChangeForm):
             raise forms.ValidationError("Las contraseñas no coinciden!")
         return password2
 
+class AvatarFormulario(forms.Form):
+    imagen=forms.ImageField(label='Imagen:',widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
+    #imagen = forms.ImageField(widget=forms.CharField(attrs={'class': 'btn-secondary'}))
