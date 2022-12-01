@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+<div class="row-cols-xl">
+    <div class="container-xl">
+        <p>
+        
+        <div class="container">
+        <h3>Estas apunto de eliminar tu foto de perfil</h3> 
+
+    <div class="modal-footer">
+        
+        <a href="{% url 'Perfil' %}"><input class="btn-secondary"  type="button" value="Cancelar"></a>
+        <form method="POST">{% csrf_token %}
+        <input class="btn-primary"    type="submit" method="POST" value="Eliminar"></form>
+    </div>
+    </div>
+</div>
+
+{% endblock contenidoQueCambia %}

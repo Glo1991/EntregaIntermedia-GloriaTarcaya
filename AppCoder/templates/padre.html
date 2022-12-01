@@ -24,7 +24,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-tabs"><a class="nav-link" href="{% url 'About' %}">Acerca de mí</a></li>
+                        <li class="nav-tabs"><a class="nav-link" href="{% url 'About' %}">About</a></li>
+                        <li class="nav-tabs"><a class="nav-link" href="{% url 'Inicio' %}">Blog</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'ListaTipoVehiculo' %}">Tipos de Vehículos</a></li>
                         <li class="nav-tabs"><a class="nav-link"  href="{% url 'ListaVehiculo' %}">Vehículos</a></li>
@@ -56,10 +57,10 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Querés reservar un vehiculo?</h1>       
+                    <h1 class="masthead-heading mb-0">Bienvenido a InfoCar</h1>       
                     <a class="btn btn-primary btn-xl rounded-pill " href="#scroll">Ver Catálogo</a>
-                    <p><h2 class="masthead-subheading mb-0">También podes ver info de lo último en vehículos!</h2></p>
-                    <!-- <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Ver INFO</a> -->
+                   <!-- <p><h2 class="masthead-subheading mb-0"></h2></p>
+                     <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Ver INFO</a> -->
                 </div>
             </div>
             <div class="bg-circle-1 bg-circle"></div>

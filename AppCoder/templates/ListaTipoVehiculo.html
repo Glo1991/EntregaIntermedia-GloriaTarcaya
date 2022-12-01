@@ -4,26 +4,26 @@
 
 
 {% block contenidoQueCambia %}
-
-    <h1>Lista de Tipo de Vehiculos</h1>
-
-
+<div class="container-lg">
+    <h1 class="display-3">Lista de Tipo de Vehiculos</h1>
+</div>
+   
     <ul>
-        
+        <div class="container-lg">
         {% for tipov in tipoVehiculos %}
-            <li>
+            <li class="list-group list-group-item-action list-group-item-ligth">
                 {{tipov}}
             </li>
             
         {% endfor %}
-    <div>
-        <button>
-             <a href="{% url 'TipoVehiculoCrear' %}">Crear Tipo de Vehículo</a>
-        </button>
-        <button>
-            <a href="{% url 'BuscarTipoVehiculo' %}">Buscar Tipo de Vehículo</a>
-       </button>
-    </div> 
+        </div>
     </ul>
+    <div class="container">
+             <a href="{% url 'TipoVehiculoCrear' %}">
+                <input class="btn-primary" type="submit" value="Crear"/></a>
+                
+            <a href="{% url 'BuscarTipoVehiculo' %}"><input class="btn-primary" type="submit" value="Buscar"></a>
+    </div> 
+
 
 {% endblock contenidoQueCambia %}

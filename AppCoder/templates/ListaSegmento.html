@@ -4,26 +4,24 @@
 
 
 {% block contenidoQueCambia %}
-
-    <h1>Lista de Segmentos</h1>
-
+<div class="container-lg">
+    <h1 class="display-3">Lista de Segmentos</h1>
+</div>
 
     <ul>
-        
+        <div class="container-lg">
         {% for segmento in segmentos %}
-            <li>
+        <li class="list-group list-group-item-action list-group-item-ligth">
                 {{segmento}}
             </li>
             
         {% endfor %}
-    <div>
-        <button>
-             <a href="{% url 'SegmentoCrear' %}">Crear Segmento</a>
-        </button>
-        <button>
-            <a href="{% url 'BuscarSegmento' %}">Buscar Segmento</a>
-       </button>
+    </div>
+</ul>
+        <div class="container">
+             <a href="{% url 'SegmentoCrear' %}"><input class="btn-primary" type="submit" value="Crear"/></a>    
+            <a href="{% url 'BuscarSegmento' %}"><input class="btn-primary" type="submit" value="Buscar"></a>
     </div> 
-    </ul>
+
 
 {% endblock contenidoQueCambia %}

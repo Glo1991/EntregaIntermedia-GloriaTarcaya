@@ -10,13 +10,18 @@
 <div class="row-cols-xl-5">
     <div class="container-xl">
         <p>
+        
+        <div class="container">
         {% if request.user.avatar_set.first.imagen.url != None %}      
             <img height="80px" src="{{request.user.avatar_set.first.imagen.url}}" style=" border-radius: 80px; background-size: 100% auto;"/>
         {% else %}
             <img height="80px" src="{%static 'assets/img/perfilvacio.png' %}" style=" border-radius: 80px; background-size: 100% auto;"/>
         {% endif %}
-        </p>
+        </p></div> 
         <a href="{% url 'AgregarAvatar' %}"><input class="btn-primary" type="button" value="Cambiar Foto"></a>
+        {% if request.user.avatar_set.first.imagen.url != None %}     
+        <a href="{% url 'EliminarAvatar' %}"><input class="btn-primary" type="button" value="Eliminar Foto"></a>
+        {% endif %}
     </div>
 </div>
 
@@ -31,5 +36,7 @@
         </form>
     </div>
 </div>
+
+<!-- Modal Structure -->
 
 {% endblock contenidoQueCambia %}

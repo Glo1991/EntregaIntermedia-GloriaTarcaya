@@ -8,7 +8,7 @@
     <h1 class="h1">Agregar Avatar de Usuario: {{user.username}}</h1>
 </div>
 <div class="container-xl">
-        <form  method="POST" enctype="multipart/form-data">{% csrf_token %} 
+        <form class="container-xl"  method="POST" enctype="multipart/form-data">{% csrf_token %} 
             {{miFormulario.as_p}}
             <input class="btn-primary" type="submit" value="Guardar"/>
         </form>

@@ -9,6 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
+from django.shortcuts import  get_object_or_404
 
 def inicio(request):
     #print(Avatar.objects.filter(user=request.user.id)[0].imagen.url)
@@ -56,8 +57,8 @@ def crea_Vehiculo(request):
 
             data = miFormulario.cleaned_data
 
-            vehiculo = Vehiculo(marca=data['marca'], modelo=data['modelo'], version=data['version'])
-            
+            vehiculo = Vehiculo(idSegmento=data['idSegmento'], idTipoVehiculo=data['idTipoVehiculo'], marca=data['marca'], modelo=data['modelo'], version=data['version'])
+            print (f'esto manda {Vehiculo}')
             vehiculo.save()
 
             return HttpResponseRedirect('/app-coder/listaVehiculo/')
@@ -286,13 +287,26 @@ def ver_perfil(request):
 def agregar_avatar(request):
 
     if request.method == 'POST':
-
+        try: 
+            avatar_inicial= Avatar.objects.get(user=request.user)
+        #avatar_inicial=get_object_or_404(Avatar, user=request.user)
+            print(avatar_inicial)    
+        except:    
+            avatar_inicial=None
+        
         miFormulario = AvatarFormulario(request.POST, request.FILES)
 
         if miFormulario.is_valid():
-            u = User.objects.get(username=request.user)
-            avatar = Avatar( user=u, imagen= miFormulario.cleaned_data['imagen'])
-            avatar.save()
+            if avatar_inicial==None:
+               
+                u = User.objects.get(username=request.user)
+                avatar = Avatar( user=u, imagen= miFormulario.cleaned_data['imagen'])
+                print(u, avatar)
+                avatar.save()
+            else:
+                avatar_inicial.imagen= miFormulario.cleaned_data['imagen']
+                avatar_inicial.save()
+
             miFormularioVerPErfil = UserViewForm(instance=request.user)
             return render(request, "perfil.html", {"miFormulario": miFormularioVerPErfil})
         
@@ -304,6 +318,26 @@ def agregar_avatar(request):
 
         return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
 
-def mostrar_avatar(request):
-    avatares=Avatar.objects.filter(user=request.user.id)[0].imagen.url
-    return render(request, "", {"url": avatares[0].imagen.url})
+def eliminar_avatar(request):
+    avatar = Avatar.objects.get(user=request.user)
+    print(request.method)
+    if request.method == 'POST':
+
+        print (avatar)
+        avatar.delete()
+
+        miFormularioVerPErfil = UserViewForm(instance=request.user)
+        print('paso por aqui')
+        return render(request, "perfil.html", {"miFormulario": miFormularioVerPErfil})  
+    
+    else:
+        
+        return render(request, "eliminarAvatar.html",{"avatar": avatar})
+    
+def tipsVehiculos(request):
+
+    return render(request, 'TipsVehiculos.html')
+
+def novedadesVehiculos(request):
+
+    return render(request, 'novedadesVehiculos.html')

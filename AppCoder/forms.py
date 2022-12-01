@@ -2,15 +2,17 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, UsernameField
 from django.contrib.auth.models import User
 from django.db import models
-#from .models import Avatar
+from .models import Segmento, TipoVehiculo
 from django.shortcuts import render
+from django.forms import ModelChoiceField
 
 class TipoVehiculoFormulario(forms.Form):
 
     nombre = forms.CharField(max_length=50)
 
 class VehiculoFormulario(forms.Form):
-
+    idSegmento = ModelChoiceField(label="Segmento", queryset=Segmento.objects.all())
+    idTipoVehiculo= ModelChoiceField(label="Tipo de Vehículo:", queryset=TipoVehiculo.objects.all())
     marca = forms.CharField(max_length=150)
     modelo=forms.CharField(max_length=150)
     version=forms.CharField(max_length=150)
@@ -71,5 +73,5 @@ class UserEditForm(UserChangeForm):
         return password2
 
 class AvatarFormulario(forms.Form):
-    imagen=forms.ImageField(label='Imagen:',widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
+    imagen=forms.ImageField(label='Imagen:',widget=forms.ClearableFileInput(attrs={'class': 'form-conrtol btn-secondary'}))
     #imagen = forms.ImageField(widget=forms.CharField(attrs={'class': 'btn-secondary'}))

@@ -4,8 +4,38 @@
 
  {% block contenidoQueCambia %}
         
-<h1>Buenvenido a Autoinfo!</h1>
-
-<h4>Esta plataforma te muestra las últimas novedades !</h4>
-
+<!-- Content section 1 -->
+     <section id="scroll">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="{%static 'assets/img/AutoBuenEstado.jpg' %}" alt="..." /></div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-5">¿Cómo mantener un auto en buen estado?</h2>
+                            <p>Tips y consejos para mantener un auto en buen estado mediante un uso más eficiente en el día a día. ¡Te contamos las claves para lograrlo!</p>
+                            <a href="{% url 'TipsVehiculos' %}"><p>Leer más...</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Content section 2-->
+         <section>
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="{%static 'assets/img/Renault-Sandero.jpg' %} " alt="..." /></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <h2 class="display-5">Renault 4EVER Trophy: el anticipo del nuevo R4 eléctrico</h2>
+                            <p>Renault develó recientemente una moderna reinterpretación de su emblemático Renault 4. Se trata del 4EVER Trophy, un modelo 100% eléctrico y con aspecto SUV. Este interesante prototipo es un adelanto.</p>
+                            <a href="{% url 'NovedadesVehiculos' %}"><p>Leer más...</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 {% endblock contenidoQueCambia %} 

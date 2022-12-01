@@ -3,13 +3,20 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
+<div class="container-lg">
+    <h1 class="display-4">Crear vehículo</h1> 
+</div>   
+<div class="row-cols-xl-5">
+    <div class="container-xl">
         
-    <form action="{% url 'VehiculoCrear' %}" method="POST">{% csrf_token %}
+        <div class="container">
+        <form class="form-content" action="{% url 'VehiculoCrear' %}" method="POST">{% csrf_token %}
 
-        {{miFormulario.as_p}}
+            {{miFormulario.as_p}}
 
-        <input type="submit" value="Enviar"/>
-
-    </form>
-
+        <input  class="btn-primary" type="submit" value="Enviar"/>
+        </form>
+        </div>
+    </div>
+</div>
 {% endblock contenidoQueCambia %}

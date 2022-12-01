@@ -4,26 +4,43 @@
 
 
 {% block contenidoQueCambia %}
-
-    <h1>Lista de Vehiculos</h1>
-
-
-    <ul>
-        
+<div class="container-lg">
+    <h1 class="display-3">Lista de Vehiculos</h1>
+</div>
+<div class="container">
+    <table class="table">
+        <tr class="table-primary"> 
+            <th>Tipo</th>
+            <th>Segmento</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Versión</th>
+        </tr>
         {% for vehiculo in vehiculos %}
-            <li>
-                {{vehiculo}}
-            </li>
-            
-        {% endfor %}
-    <div>
-        <button>
-             <a href="{% url 'VehiculoCrear' %}">Crear Vehículo</a>
-        </button>
-        <button>
-            <a href="{% url 'BuscarVehiculo' %}">Buscar Vehículo</a>
-       </button>
+        <tr > 
+            <td >             
+                {{vehiculo.idTipoVehiculo}}            
+            </td>
+            <td >             
+                {{vehiculo.idSegmento}}            
+            </td>
+            <td >             
+                {{vehiculo.marca}}            
+            </td>
+            <td >             
+                {{vehiculo.modelo}}            
+            </td>
+            <td >             
+                {{vehiculo.version}}            
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+</div>   
+
+    <div class="container">
+             <a href="{% url 'VehiculoCrear' %}"><input class="btn-primary" type="submit" value="Crear"/></a>
+            <a href="{% url 'BuscarVehiculo' %}"><input class="btn-primary" type="submit" value="Buscar"></a>
     </div> 
-    </ul>
 
 {% endblock contenidoQueCambia %}
