@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import TipoVehiculo, Vehiculo, Segmento, Avatar
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm, UserEditForm, UserViewForm, AvatarFormulario
+from .forms import (TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm, UserEditForm, 
+UserViewForm, AvatarFormulario)
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -43,30 +44,27 @@ def crea_TipoVehiculo(request):
 
         return render(request, "TipoVehiculoCreate.html", {"miFormulario": miFormulario})
 
-@staff_member_required(login_url="/app-coder/listaVehiculo")
 def crea_Vehiculo(request):
-
     print('method:', request.method)
     print('post: ', request.POST)
 
     if request.method == 'POST':
-
-        miFormulario = VehiculoFormulario(request.POST)
-
+        miFormulario = VehiculoFormulario(request.POST, request.FILES)
+        print('paso por este en imagenes')
         if miFormulario.is_valid():
-
+          
+            print('entro por el  if ')
             data = miFormulario.cleaned_data
 
-            vehiculo = Vehiculo(idSegmento=data['idSegmento'], idTipoVehiculo=data['idTipoVehiculo'], marca=data['marca'], modelo=data['modelo'], version=data['version'])
-            print (f'esto manda {Vehiculo}')
+            vehiculo = Vehiculo(idSegmento=data['idSegmento'], idTipoVehiculo=data['idTipoVehiculo'], marca=data['marca'], 
+                modelo=data['modelo'], version=data['version'], publicar=data['publicar'], imagenVO=data['imagenVO'])   
             vehiculo.save()
-
+           
             return HttpResponseRedirect('/app-coder/listaVehiculo/')
     
     else:
-
+        print('Hola mundo')
         miFormulario = VehiculoFormulario()
-
         return render(request, "VehiculosCreate.html", {"miFormulario": miFormulario})
 
 def crea_Segmento(request):
@@ -285,23 +283,22 @@ def ver_perfil(request):
 
 
 def agregar_avatar(request):
-
+    print('method:', request.method)
+    print('post: ', request.POST)
     if request.method == 'POST':
         try: 
             avatar_inicial= Avatar.objects.get(user=request.user)
-        #avatar_inicial=get_object_or_404(Avatar, user=request.user)
-            print(avatar_inicial)    
         except:    
             avatar_inicial=None
-        
+    
         miFormulario = AvatarFormulario(request.POST, request.FILES)
-
+        print('por auqi form: ', miFormulario)
         if miFormulario.is_valid():
             if avatar_inicial==None:
                
                 u = User.objects.get(username=request.user)
                 avatar = Avatar( user=u, imagen= miFormulario.cleaned_data['imagen'])
-                print(u, avatar)
+              
                 avatar.save()
             else:
                 avatar_inicial.imagen= miFormulario.cleaned_data['imagen']
@@ -341,3 +338,66 @@ def tipsVehiculos(request):
 def novedadesVehiculos(request):
 
     return render(request, 'novedadesVehiculos.html')
+
+def verImagenVO(request, id):
+    
+    VO = Vehiculo.objects.get(id = id)
+       
+    
+    return render(request, 'verImagenVO.html',{"VO": VO})
+
+def eliminar_VO(request, id):
+    VO = Vehiculo.objects.get(id=id)
+    if request.method == 'POST':
+
+        VO.delete()
+
+        vehiculos = Vehiculo.objects.all()
+
+        return render(request, "ListaVehiculo.html", {"vehiculos": vehiculos}) 
+    
+    else:
+        print('este get eliminar')
+        return render(request, "eliminarVO.html",{"VO": VO})
+
+
+def editar_VO(request,id):
+    vehiculo = Vehiculo.objects.get(id=id)
+    print(f'este es el VO {vehiculo}')
+    
+    if request.method == 'POST':
+
+        miFormulario = VehiculoFormulario(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            vehiculo.idSegmento=data["idSegmento"]
+            vehiculo.idTipoVehiculo=data["idTipoVehiculo"]
+            vehiculo.marca = data["marca"]
+            vehiculo.modelo = data["modelo"]
+            vehiculo.version=data["version"]
+            vehiculo.publicar=data["publicar"]
+            vehiculo.imagenVO=data["imagenVO"]
+
+            vehiculo.save()
+            print(f'vehiculo guardado {vehiculo}')
+            return HttpResponseRedirect('/app-coder/listaVehiculo/')
+            #return render(request, "ListaVehiculo.html", {"vehiculo": vehiculo}) 
+        
+        return render(request, "inicio.html", {"mensaje": 'No es posible modificarlo'} )
+    
+    else:
+
+        miFormulario = VehiculoFormulario(initial={
+            "marca": vehiculo.marca,
+            "modelo": vehiculo.modelo,
+            "version": vehiculo.version,
+            "idSegmento": vehiculo.idSegmento,
+            "idTipoVehiculo": vehiculo.idTipoVehiculo,
+            "publicar": vehiculo.publicar,
+            "ImagenVO": vehiculo.imagenVO
+        })
+
+        return render(request, "editarVO.html", {"miFormulario": miFormulario, "id": vehiculo.id})

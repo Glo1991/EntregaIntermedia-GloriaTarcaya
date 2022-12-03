@@ -4,6 +4,7 @@
 
 
 {% block contenidoQueCambia %}
+<script src="https://unpkg.com/htmx.org@1.8.2" integrity="sha384-+8ISc/waZcRdXCLxVgbsLzay31nCdyZXQxnsUy++HJzJliTzxKWr0m1cIEMyUzQu" crossorigin="anonymous"></script>
 <div class="container-lg">
     <h1 class="display-3">Lista de Vehiculos</h1>
 </div>
@@ -15,6 +16,9 @@
             <th>Marca</th>
             <th>Modelo</th>
             <th>Versión</th>
+            <th>Publicado</th>
+            <th>Imagen</th>
+            <th>Editar/Eliminar</th>
         </tr>
         {% for vehiculo in vehiculos %}
         <tr > 
@@ -33,6 +37,29 @@
             <td >             
                 {{vehiculo.version}}            
             </td>
+            <td >             
+                {% if vehiculo.publicar == 0 %}
+                NO
+                {% else %}   
+                SI
+                {% endif %}       
+            </td>
+            <td >             
+                {% if vehiculo.imagenVO != None %}
+                <a class="btn-link" 
+                href="{% url 'VerImagenVO' vehiculo.id %}">VER</a>
+                {% else %}   
+                Sin imagen
+                {% endif %}       
+            </td>
+            <td >             
+            <a class="btn btn-warning " 
+                href="{% url 'EditarVO' vehiculo.id %}"><i class="far fa-edit"></i></a>          
+           
+            <a class="btn btn-danger" 
+            href="{% url 'EliminarVO' vehiculo.id %}"><i class="fa fa-trash-alt"></i></a>  
+        </td>        
+        </td>
         </tr>
             {% endfor %}
     </table>

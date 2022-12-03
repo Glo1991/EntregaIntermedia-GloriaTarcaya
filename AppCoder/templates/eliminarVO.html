@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+<div class="row-cols-xl">
+    <div class="container-xl">
+        <p>
+        
+        <div class="container">
+        <h3>Estas apunto de eliminar el Vehículo {{VO.marca}} {{VO.modelo}} {{VO.version}}</h3> 
+
+    <div class="modal-footer">
+        
+        <a href="{% url 'ListaVehiculo' %}"><input class="btn-secondary"  type="button" value="Cancelar"></a>
+        <form action="{% url 'EliminarVO' VO.id %}" method="POST">{% csrf_token %}
+        <input class="btn-primary"    type="submit" method="POST" value="Eliminar"></form>
+    </div>
+    </div>
+</div>
+
+{% endblock contenidoQueCambia %}

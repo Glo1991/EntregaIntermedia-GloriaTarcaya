@@ -16,6 +16,8 @@ class VehiculoFormulario(forms.Form):
     marca = forms.CharField(max_length=150)
     modelo=forms.CharField(max_length=150)
     version=forms.CharField(max_length=150)
+    publicar= forms.BooleanField()
+    imagenVO=forms.ImageField(label='Imagen :',widget=forms.ClearableFileInput(attrs={'class': 'form-conrtol btn-secondary'}))
 
 class SegmentoFormulario(forms.Form):
 
@@ -44,8 +46,6 @@ class UserViewForm(forms.ModelForm):
         model = User
         fields = ['username', 'last_name', 'first_name', 'email']
         
-
-
 class UserEditForm(UserChangeForm):
 
     password = forms.CharField(
@@ -74,4 +74,3 @@ class UserEditForm(UserChangeForm):
 
 class AvatarFormulario(forms.Form):
     imagen=forms.ImageField(label='Imagen:',widget=forms.ClearableFileInput(attrs={'class': 'form-conrtol btn-secondary'}))
-    #imagen = forms.ImageField(widget=forms.CharField(attrs={'class': 'btn-secondary'}))

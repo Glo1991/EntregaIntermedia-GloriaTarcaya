@@ -1,0 +1,19 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<div class="container-lg">
+    <h1 class="display-4">{{VO.marca}} {{VO.modelo}} {{VO.version}}</h1> 
+</div>   
+
+    <div class="container-xl">
+        
+        <div class="container">              
+                    <img height="300px" src="{{VO.imagenVO.url}}" style=" border-radius: 80px; background-size: 100% auto;"/>
+            <p></div> 
+                <a href="{% url 'ListaVehiculo' %}"><input class="btn-primary" type="submit" value="Volver"/></a>
+            </p>
+        </div>
+    </div>
+{% endblock contenidoQueCambia %}
