@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import TipoVehiculo, Vehiculo, Segmento, Avatar
+from .models import TipoVehiculo, Vehiculo, Segmento, Avatar,mensaje
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import (TipoVehiculoFormulario, VehiculoFormulario,SegmentoFormulario, UserRegisterForm, UserEditForm, 
-UserViewForm, AvatarFormulario)
+UserViewForm, AvatarFormulario, MensajeFormulario)
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -401,3 +401,38 @@ def editar_VO(request,id):
         })
 
         return render(request, "editarVO.html", {"miFormulario": miFormulario, "id": vehiculo.id})
+
+def verCatalogo(request):
+    vehiculos = Vehiculo.objects.filter(publicar=1).order_by('marca')
+    print(vehiculos)
+    return render(request, 'catalogo.html', {"vehiculos": vehiculos})
+
+@staff_member_required(login_url="/app-coder/registrar")
+def formReservar(request,id):
+    vehiculo = Vehiculo.objects.get(id=id)
+    usuario=request.user
+    if request.method == 'POST':
+
+        miFormulario = MensajeFormulario(request.POST)
+
+        if miFormulario.is_valid():
+            u = User.objects.get(username=request.user)
+
+            data=miFormulario.cleaned_data()
+
+            msj = mensaje( usuario=u, idVO=data['idVO'],telefono=data['telefono'], txt_msj=data['txt_msj'] )
+              
+            msj.save()
+
+            
+            vehiculos = Vehiculo.objects.filter(publicar=1).order_by('marca')
+            print(vehiculos)
+            return render(request, 'catalogo.html', {"vehiculos": vehiculos})
+    
+    else:
+
+        miFormulario = MensajeFormulario(initial={
+        "user": usuario,
+        "idVO": vehiculo.marca})
+
+        return render(request, "formReservar.html", {"miFormulario": miFormulario})

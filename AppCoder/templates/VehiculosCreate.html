@@ -9,14 +9,13 @@
 <div class="row-cols-xl-5">
     <div class="container-xl">
         
-        <div class="container">
-        <form class="form-content" action="{% url 'VehiculoCrear' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-
-            {{miFormulario.as_p}}
-           
+        <form class="form-control" action="{% url 'VehiculoCrear' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <label class="form-text">
+                    {{miFormulario.as_p}}</label>         
             <input  class="btn-primary" type="submit" value="Enviar"/>
         </form>
-        </div>
+
     </div>
 </div>
+<p></p>
 {% endblock contenidoQueCambia %}

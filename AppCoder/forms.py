@@ -11,8 +11,8 @@ class TipoVehiculoFormulario(forms.Form):
     nombre = forms.CharField(max_length=50)
 
 class VehiculoFormulario(forms.Form):
-    idSegmento = ModelChoiceField(label="Segmento", queryset=Segmento.objects.all())
-    idTipoVehiculo= ModelChoiceField(label="Tipo de Vehículo:", queryset=TipoVehiculo.objects.all())
+    idSegmento = forms.ModelChoiceField(label="Segmento", queryset=Segmento.objects.all())
+    idTipoVehiculo= forms.ModelChoiceField(label="Tipo de Vehículo:", queryset=TipoVehiculo.objects.all())
     marca = forms.CharField(max_length=150)
     modelo=forms.CharField(max_length=150)
     version=forms.CharField(max_length=150)
@@ -74,3 +74,14 @@ class UserEditForm(UserChangeForm):
 
 class AvatarFormulario(forms.Form):
     imagen=forms.ImageField(label='Imagen:',widget=forms.ClearableFileInput(attrs={'class': 'form-conrtol btn-secondary'}))
+
+class MensajeFormulario(forms.Form):
+    user = forms.CharField(label='Usuario:') 
+    user.widget.attrs.update({'disabled': 'disabled'})
+    idVO = forms.CharField(label='Vehiculo:')
+    idVO.widget.attrs.update({'disabled': 'disabled'})
+    telefono=forms.CharField()
+    telefono.widget.attrs.update({'type':'number'})
+    txt_msj=forms.CharField(label='Comentario:')
+    txt_msj.widget.attrs.update({'class': 'form-control text-area'})
+

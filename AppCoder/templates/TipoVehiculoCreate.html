@@ -9,8 +9,7 @@
     <div class="container-xl">
         <p>
         
-        <div class="container">
-        <form class="form-content" action="{% url 'TipoVehiculoCrear' %}" method="POST">{% csrf_token %}
+        <form class="form-control" action="{% url 'TipoVehiculoCrear' %}" method="POST">{% csrf_token %}
 
         {{miFormulario.as_p}}
 
@@ -20,6 +19,5 @@
     
 </div>
 </div>
-</div>
-
+<p></p>
 {% endblock contenidoQueCambia %}

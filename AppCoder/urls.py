@@ -3,7 +3,8 @@ from django.urls import path, include
 from .views import (inicio, crea_TipoVehiculo, crea_Segmento, crea_Vehiculo, listaTipoVehiculos, 
 listaSegmentos,listaVehiculos, resultadoTipoVehiculo, busquedaTipoVehiculo, busquedaVehiculo, 
 busquedaSegmento,resultadoSegmento, resultadoVehiculo, login_request, register, about, editar_perfil, ver_perfil,
-agregar_avatar, eliminar_avatar, tipsVehiculos, novedadesVehiculos, verImagenVO, eliminar_VO,editar_VO)
+agregar_avatar, eliminar_avatar, tipsVehiculos, novedadesVehiculos, verImagenVO, eliminar_VO,editar_VO,
+verCatalogo, formReservar)
 from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('', inicio, name='Inicio'),
@@ -32,4 +33,6 @@ urlpatterns = [
     path('verImagenVO/<int:id>', verImagenVO, name="VerImagenVO"),
     path('eliminarVO/<int:id>', eliminar_VO, name="EliminarVO"),
     path('editarVO/<int:id>', editar_VO, name="EditarVO"),
+    path('catalogo/', verCatalogo, name="VerCatalogo"),
+    path('formReservar/<int:id>', formReservar, name="FormReservar"),
 ]

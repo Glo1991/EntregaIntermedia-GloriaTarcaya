@@ -4,13 +4,18 @@
 
 
 {% block contenidoQueCambia %}
-
-    <form action="{% url 'resultadoTipoVehiculo' %}" method="GET">{% csrf_token %}
+<p></p>
+<div class="row-cols-xl-5">
+    <div class="container-xl">
+        
+        <form class="form-control" action="{% url 'resultadoTipoVehiculo' %}" method="GET">{% csrf_token %}
 
         <p>Tipo de Vehiculo: <input type="text" name="tipoVehiculo"></p>
 
-        <input type="submit" value="Buscar">
+        <input class="btn-primary" type="submit" value="Buscar">
 
     </form>
-
+</div>
+</div>
+<p></p>
 {% endblock contenidoQueCambia %}

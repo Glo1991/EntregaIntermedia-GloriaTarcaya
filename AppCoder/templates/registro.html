@@ -5,14 +5,19 @@
 
 {% block contenidoQueCambia %}
 
-
-<form action="{% url 'Registrar' %}" method="POST">{% csrf_token %}
+<p></p>
+<div class="row-cols-xl-5">
+    <div class="container-xl">
+        
+        <form class="form-control" action="{% url 'Registrar' %}" method="POST">{% csrf_token %}
 
     {{miFormulario.as_p}}
 
-    <input type="submit" value="Registrar"/>
+    <input class="btn-primary" type="submit" value="Registrar"/>
 
 </form>
-
+    </div>
+</div>
+<p></p>
 
 {% endblock contenidoQueCambia %}

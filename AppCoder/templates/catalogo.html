@@ -1,0 +1,29 @@
+{% extends 'padreCatalogo.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<section id="scroll">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            {% for v in vehiculos %}
+            <div class="col-lg-6 order-lg-2">           
+                    {% if v.imagenVO != None %}
+                <div class="p-5"><img class="img-fluid " src="{{v.imagenVO.url}}" alt="..." /></div>
+                    {% else %}
+                    <div class="p-5"><img class="img-fluid" src="{% static 'assets/img/VOsinImagenes.jpg' %}" alt="..." /></div>
+                    {% endif %}             
+            </div>
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5">                 
+                    <h2 class="display-4">{{v.marca}} {{v.modelo}}</h2>
+                    <p>Versión: {{v.version}}</p>  
+                    <a href="{% url 'FormReservar' v.id %}"><input class="btn-lg btn-success " type="submit" value="Reservar">  </a>            
+                </div>
+            </div>
+           {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock contenidoQueCambia %}

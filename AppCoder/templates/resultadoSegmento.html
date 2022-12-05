@@ -5,20 +5,23 @@
 
 {% block contenidoQueCambia %}
 
-    <p>Resultado de Busqueda: {{segmento}}</p>
+<div class="container-lg" ><h2 class="display-4 "><p>Resultado de Busqueda: {{segmento}}</p></h2></div>
 
     {% if segmentoname %}
 
         <ul>
-
+            <div class="container-lg">
             {% for seg in segmentoname %}
-                <li>
+            <li class="list-group list-group-item-action list-group-item-ligth">
                     
                     {{seg.name}} 
                 </li>
             {% endfor %}
-                
-        </ul>
+        </div>
+    </ul>
+    <div class="container">
+        <a href="{% url 'ListaSegmento' %}"><input class="btn-primary" type="submit" value="Volver"/></a>    
+    </div> 
 
     {% else %}
 

@@ -3,13 +3,20 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
+<div class="container-lg">
+    <h1 class="display-4">Crear segmento</h1> 
+</div>   
+<div class="row-cols-xl-5">
+    <div class="container-xl">
         
-    <form action="{% url 'SegmentoCrear' %}" method="POST">{% csrf_token %}
+        <form class="form-control" action="{% url 'SegmentoCrear' %}" method="POST">{% csrf_token %}
 
         {{miFormulario.as_p}}
 
-        <input type="submit" value="Enviar"/>
+        <input class="btn-primary" type="submit" value="Enviar"/>
 
     </form>
-
+</div>
+</div>
+<p></p>
 {% endblock contenidoQueCambia %}

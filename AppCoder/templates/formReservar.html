@@ -1,0 +1,19 @@
+{% extends 'padreCatalogo.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<p></p>
+<div class="row-cols-xl-5">
+    <div class="container-xl">
+        <form class="form-control" action="{% url 'EditarPerfil' %}" method="GET" >{% csrf_token %} 
+  
+            <label class="form-text">
+                {{miFormulario.as_p}}</label>
+
+            <input class="btn-primary" type="submit" value="RESERVAR"/>
+        </form>
+    </div>
+</div>
+<p></p>
+{% endblock contenidoQueCambia %}

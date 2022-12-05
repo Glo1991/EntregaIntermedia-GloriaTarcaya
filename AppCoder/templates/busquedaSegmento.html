@@ -4,13 +4,19 @@
 
 
 {% block contenidoQueCambia %}
-
-    <form action="{% url 'resultadoSegmento' %}" method="GET">{% csrf_token %}
+<p></p>
+<div class="row-cols-xl-5">
+    <div class="container-xl">
+        
+        <form class="form-control" action="{% url 'resultadoSegmento' %}" method="GET">{% csrf_token %}
 
         <p>Segmento: <input type="text" name="segmento"></p>
 
-        <input type="submit" value="Buscar">
+        <input class="btn-primary" type="submit" value="Buscar">
 
     </form>
-
+    
+</div>
+</div>
+<p></p>
 {% endblock contenidoQueCambia %}
