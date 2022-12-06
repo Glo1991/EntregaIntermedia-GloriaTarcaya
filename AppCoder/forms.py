@@ -16,8 +16,8 @@ class VehiculoFormulario(forms.Form):
     marca = forms.CharField(max_length=150)
     modelo=forms.CharField(max_length=150)
     version=forms.CharField(max_length=150)
-    publicar= forms.BooleanField()
-    imagenVO=forms.ImageField(label='Imagen :',widget=forms.ClearableFileInput(attrs={'class': 'form-conrtol btn-secondary'}))
+    publicar= forms.BooleanField(required=False)
+    imagenVO=forms.ImageField(label='Imagen :', widget=forms.ClearableFileInput(attrs={'class': 'form-conrtol btn-secondary'}), required=False)
 
 class SegmentoFormulario(forms.Form):
 

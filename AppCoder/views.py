@@ -12,6 +12,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from django.shortcuts import  get_object_or_404
 from datetime import datetime
+from django import template
+from django.contrib.auth.models import Group 
 
 def inicio(request):
     #print(Avatar.objects.filter(user=request.user.id)[0].imagen.url)
@@ -210,7 +212,7 @@ def login_request (request):
 
         return render(request, "login.html", {"miFormulario": miFormulario})
 
-def register(request):
+def registerUser(request):
 
     print('method:', request.method)
     print('post: ', request.POST)

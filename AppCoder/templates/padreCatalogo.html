@@ -33,7 +33,9 @@
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'Inicio' %}">Blog</a></li>
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'VerCatalogo' %}">Catálogo</a></li>
                      
-                        {% if groups.user.administrador %}
+
+
+                        {% if user.is_authenticated %}
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'VerReservas' %}">Reservas</a></li>
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'ListaTipoVehiculo' %}">Tipos Vehículos</a></li>
                         <li class="nav-tabs"><a class="nav-link"  href="{% url 'ListaVehiculo' %}">Vehículos</a></li>
@@ -85,10 +87,10 @@
             <div class="bg-circle-4 bg-circle"></div>
         </header>
         <!-- Content section 1 -->
-      
+        {{ user.groups.all }}
         {% block contenidoQueCambia %}
-
     
+
          {% endblock contenidoQueCambia %}
         <!-- Footer-->
         <footer class="py-5 bg-black">

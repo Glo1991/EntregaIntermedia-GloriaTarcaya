@@ -45,7 +45,7 @@
                 {% endif %}       
             </td>
             <td >             
-                {% if vehiculo.imagenVO != None %}
+                {% if vehiculo.imagenVO%}
                 <a class="btn-link" 
                 href="{% url 'VerImagenVO' vehiculo.id %}">VER</a>
                 {% else %}   
