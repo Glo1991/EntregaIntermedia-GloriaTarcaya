@@ -41,12 +41,10 @@ class mensaje(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     idVO = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
-    telefono=models.BigIntegerField()
+    telefono=models.CharField(max_length=10)
     txt_msj=models.CharField(max_length=300)
-
+    fechaReserva=models.DateTimeField()
 
     def __str__(self):
         return f'{self.user} - {self.idVO} - {self.telefono} - {self.txt_msj}'   
             
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)

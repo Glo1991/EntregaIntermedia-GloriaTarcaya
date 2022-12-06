@@ -1,0 +1,56 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<p></p>
+<div class="container-lg">
+    <h1 class="display-3">Lista de Reservas</h1>
+</div>
+   
+<div class="container">
+    <table class="table table-bordered ">
+        <tr class="table-primary"> 
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Mail</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Versión</th>
+            <th>Tel Contacto</th>
+            <th>Mensaje</th>
+        </tr>
+        {% for msj in mensaje %}
+        <tr class=""> 
+            <td >             
+                {{msj.fechaReserva |date:'d-m-Y H:i'}}            
+            </td>
+            <td >             
+                {{msj.user}}            
+            </td>
+            <td >             
+                {{msj.user.email}}            
+            </td>
+            <td >             
+                {{msj.idVO.marca}}            
+            </td>
+            <td >             
+                {{msj.idVO.modelo}}            
+            </td>
+            <td >             
+                {{msj.idVO.version}}            
+            </td>
+            <td >             
+                {{msj.telefono}}            
+            </td>
+            <td >             
+                {{msj.txt_msj}}            
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+</div>   
+
+<p></p>
+
+{% endblock contenidoQueCambia %}

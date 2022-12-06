@@ -4,12 +4,18 @@
 
 {% block contenidoQueCambia %}
 <p></p>
+<div class="container px-5">
+    <div class="row gx-5 align-items-center">
+    <h1 >Vas a realizar una reserva!</h1>
+</div>
+</div>
 <div class="row-cols-xl-5">
     <div class="container-xl">
-        <form class="form-control" action="{% url 'EditarPerfil' %}" method="GET" >{% csrf_token %} 
+        <form class="form-control" action="{% url 'FormReservar' id %}" method="POST" >{% csrf_token %} 
   
             <label class="form-text">
-                {{miFormulario.as_p}}</label>
+                {{miFormulario.as_p}}
+            </label>
 
             <input class="btn-primary" type="submit" value="RESERVAR"/>
         </form>

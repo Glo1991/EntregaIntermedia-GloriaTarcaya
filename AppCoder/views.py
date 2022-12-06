@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from django.shortcuts import  get_object_or_404
+from datetime import datetime
 
 def inicio(request):
     #print(Avatar.objects.filter(user=request.user.id)[0].imagen.url)
@@ -404,24 +405,27 @@ def editar_VO(request,id):
 
 def verCatalogo(request):
     vehiculos = Vehiculo.objects.filter(publicar=1).order_by('marca')
+    usuario=request.user
     print(vehiculos)
     return render(request, 'catalogo.html', {"vehiculos": vehiculos})
 
-@staff_member_required(login_url="/app-coder/registrar")
+
 def formReservar(request,id):
     vehiculo = Vehiculo.objects.get(id=id)
     usuario=request.user
+   
+    print(request.method )
     if request.method == 'POST':
-
         miFormulario = MensajeFormulario(request.POST)
-
+      
+        print(miFormulario)
         if miFormulario.is_valid():
+          
             u = User.objects.get(username=request.user)
-
-            data=miFormulario.cleaned_data()
-
-            msj = mensaje( usuario=u, idVO=data['idVO'],telefono=data['telefono'], txt_msj=data['txt_msj'] )
-              
+            data=miFormulario.cleaned_data
+            
+            msj = mensaje( user=u, idVO=vehiculo ,telefono=data['telefono'], txt_msj=data['txt_msj'], fechaReserva=datetime.now() )
+            
             msj.save()
 
             
@@ -430,9 +434,16 @@ def formReservar(request,id):
             return render(request, 'catalogo.html', {"vehiculos": vehiculos})
     
     else:
-
+        VOReserva= vehiculo.marca +'-' + vehiculo.modelo +'-' + vehiculo.version 
         miFormulario = MensajeFormulario(initial={
         "user": usuario,
-        "idVO": vehiculo.marca})
+        "idVO":VOReserva
+        })
+        
+        return render(request, "formReservar.html", {"miFormulario": miFormulario, "id": vehiculo.id})
 
-        return render(request, "formReservar.html", {"miFormulario": miFormulario})
+
+def verReservas(request):
+    msj = mensaje.objects.all().order_by('fechaReserva')
+
+    return render(request, 'verReservas.html', {"mensaje": msj})

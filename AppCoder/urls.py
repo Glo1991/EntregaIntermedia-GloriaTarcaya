@@ -4,7 +4,7 @@ from .views import (inicio, crea_TipoVehiculo, crea_Segmento, crea_Vehiculo, lis
 listaSegmentos,listaVehiculos, resultadoTipoVehiculo, busquedaTipoVehiculo, busquedaVehiculo, 
 busquedaSegmento,resultadoSegmento, resultadoVehiculo, login_request, register, about, editar_perfil, ver_perfil,
 agregar_avatar, eliminar_avatar, tipsVehiculos, novedadesVehiculos, verImagenVO, eliminar_VO,editar_VO,
-verCatalogo, formReservar)
+verCatalogo, formReservar, verReservas)
 from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('', inicio, name='Inicio'),
@@ -35,4 +35,5 @@ urlpatterns = [
     path('editarVO/<int:id>', editar_VO, name="EditarVO"),
     path('catalogo/', verCatalogo, name="VerCatalogo"),
     path('formReservar/<int:id>', formReservar, name="FormReservar"),
+    path('verReservas/', verReservas, name="VerReservas"),
 ]

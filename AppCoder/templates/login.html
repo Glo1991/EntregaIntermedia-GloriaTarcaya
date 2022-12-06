@@ -5,13 +5,19 @@
 
 {% block contenidoQueCambia %}
 
-
-<form action="{% url 'Login' %}" method="POST">
+<p></p>
+<div class="row-cols-xl-5">
+    <div class="container-xl">
+        
+        <form class="form-control" action="{% url 'Login' %}" method="POST">
     {% csrf_token %}
 
     {{miFormulario.as_p}}
-    <input type="submit" value="Iniciar Sesión">
+    <input class="btn-primary" type="submit" value="Iniciar Sesión">
 </form>
 
+</div>
+</div>
+<p></p>
 
 {% endblock contenidoQueCambia %}

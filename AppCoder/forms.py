@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, UsernameField
 from django.contrib.auth.models import User
 from django.db import models
-from .models import Segmento, TipoVehiculo
+from .models import Segmento, TipoVehiculo, mensaje
 from django.shortcuts import render
 from django.forms import ModelChoiceField
 
@@ -45,7 +45,7 @@ class UserViewForm(forms.ModelForm):
 
         model = User
         fields = ['username', 'last_name', 'first_name', 'email']
-        
+
 class UserEditForm(UserChangeForm):
 
     password = forms.CharField(
@@ -76,12 +76,15 @@ class AvatarFormulario(forms.Form):
     imagen=forms.ImageField(label='Imagen:',widget=forms.ClearableFileInput(attrs={'class': 'form-conrtol btn-secondary'}))
 
 class MensajeFormulario(forms.Form):
-    user = forms.CharField(label='Usuario:') 
+
+    user = forms.CharField(label='Usuario:',required=False)
     user.widget.attrs.update({'disabled': 'disabled'})
-    idVO = forms.CharField(label='Vehiculo:')
+    idVO = forms.CharField(label='Vehiculo:',required=False)
     idVO.widget.attrs.update({'disabled': 'disabled'})
-    telefono=forms.CharField()
-    telefono.widget.attrs.update({'type':'number'})
-    txt_msj=forms.CharField(label='Comentario:')
-    txt_msj.widget.attrs.update({'class': 'form-control text-area'})
+    telefono=forms.CharField(label='Telefono:', max_length=10)
+    txt_msj=forms.CharField(label ="", widget = forms.Textarea(attrs ={'class':'form-control',
+        'placeholder':'Ingrese un Comentario...',
+        'rows':4,
+        'cols':50
+    }))
 
