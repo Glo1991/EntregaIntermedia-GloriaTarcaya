@@ -412,7 +412,7 @@ def verCatalogo(request):
     print(usergroup)
     return render(request, 'catalogo.html', {"vehiculos": vehiculos})
 
-
+@login_required(login_url="/app-coder/registrar")
 def formReservar(request,id):
     vehiculo = Vehiculo.objects.get(id=id)
     usuario=request.user
@@ -437,13 +437,14 @@ def formReservar(request,id):
             return render(request, 'catalogo.html', {"vehiculos": vehiculos})
     
     else:
-        VOReserva= vehiculo.marca +'-' + vehiculo.modelo +'-' + vehiculo.version 
-        miFormulario = MensajeFormulario(initial={
-        "user": usuario,
-        "idVO":VOReserva
-        })
+        if usuario != None:
+            VOReserva= vehiculo.marca +'-' + vehiculo.modelo +'-' + vehiculo.version 
+            miFormulario = MensajeFormulario(initial={
+            "user": usuario,
+            "idVO":VOReserva
+            })
         
-        return render(request, "formReservar.html", {"miFormulario": miFormulario, "id": vehiculo.id})
+            return render(request, "formReservar.html", {"miFormulario": miFormulario, "id": vehiculo.id})
 
 
 def verReservas(request):
