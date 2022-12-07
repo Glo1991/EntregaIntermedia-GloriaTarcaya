@@ -9,4 +9,11 @@ Dentro del listado de vehiculos existe la opción para modificar y eliminar un v
 <li>About: Contiene información sobre la web y sobre mí.</li>
 <li>Blog: Contiene información sobre vehiculos (tips y lo nuevo en vehículos)</li>
 <li>Ver Catálogo: Dentro de esta opción se muestra los vehículos publicados y es posible Reservar alguno</li>
+<li>Reservas: Dentro de esta opción se muestra las reservas realizadas</li>
 </p>
+<p> </p>
+<h2>Log in</h2>
+<p> Tenemos la opción de registrarnos, loguearnos y ver nuestro perfil de usuario. Dentro del perfil es posible modificar nuestros datos, modificar imagen y contraseña. El administrador de la web tiene la posibilidad de asignarnos un grupo para ver los diferentes menús según el grupo.
+</p>
+
+
