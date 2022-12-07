@@ -9,11 +9,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, GroupManager
 from django.shortcuts import  get_object_or_404
 from datetime import datetime
 from django import template
-from django.contrib.auth.models import Group 
 
 def inicio(request):
     #print(Avatar.objects.filter(user=request.user.id)[0].imagen.url)
@@ -408,7 +407,9 @@ def editar_VO(request,id):
 def verCatalogo(request):
     vehiculos = Vehiculo.objects.filter(publicar=1).order_by('marca')
     usuario=request.user
-    print(vehiculos)
+    grupo=Group.objects.all()
+    usergroup= request.user.groups.all
+    print(usergroup)
     return render(request, 'catalogo.html', {"vehiculos": vehiculos})
 
 

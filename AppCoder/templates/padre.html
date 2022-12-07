@@ -33,12 +33,20 @@
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'Inicio' %}">Blog</a></li>
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'VerCatalogo' %}">Catálogo</a></li>
                     
-                        {% if user.is_authenticated %}
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'vendedor'  %}
+                        <li class="nav-tabs"><a class="nav-link" href="{% url 'VerReservas' %}">Reservas</a></li>
+                            {% endif %} 
+                        {% endfor %}
+                        
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'supervisor' or group.name == 'administrador'  %}
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'VerReservas' %}">Reservas</a></li>
                         <li class="nav-tabs"><a class="nav-link" href="{% url 'ListaTipoVehiculo' %}">Tipos Vehículos</a></li>
                         <li class="nav-tabs"><a class="nav-link"  href="{% url 'ListaVehiculo' %}">Vehículos</a></li>
                         <li class="nav-tabs"><a class="nav-link"  href="{% url 'ListaSegmento' %}">Segmentos</a></li>
-                        {% endif %}
+                            {% endif %} 
+                        {% endfor %}
                 </div>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
